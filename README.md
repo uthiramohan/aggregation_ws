@@ -90,3 +90,50 @@ is displayed (`{'error_message': 'Too many flow objects are being registered', '
 
 ## Unsupported Methods
 The API returns HTTP 405 response code for any HTTP methods other than GET or POST
+
+Sample Make Test Coverage Report
+umohan@C02TK24HG8WL-lm aggregation_ws % make test
+chmod +x scripts/test.sh
+./scripts/test.sh
+=========================================== test session starts ===========================================
+platform darwin -- Python 3.9.1, pytest-7.1.1, pluggy-1.0.0
+rootdir: /Users/umohan/Desktop/newfolder/aggregation_ws
+plugins: anyio-3.5.0, cov-3.0.0
+collected 5 items                                                                                         
+
+tests/test_application.py ....                                                                      [ 80%]
+tests/routers/test_retrieve_flows.py .                                                              [100%]
+
+============================================ 5 passed in 0.70s ============================================
+=========================================== test session starts ===========================================
+platform darwin -- Python 3.9.1, pytest-7.1.1, pluggy-1.0.0
+rootdir: /Users/umohan/Desktop/newfolder/aggregation_ws
+plugins: anyio-3.5.0, cov-3.0.0
+collected 5 items                                                                                         
+
+tests/test_application.py ....                                                                      [ 80%]
+tests/routers/test_retrieve_flows.py .                                                              [100%]
+
+---------- coverage: platform darwin, python 3.9.1-final-0 -----------
+Name                                         Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------------
+app/__init__.py                                  0      0   100%
+app/middleware/__init__.py                       0      0   100%
+app/middleware/authentication.py                 0      0   100%
+app/models/__init__.py                           0      0   100%
+app/models/flows_definitions.py                  8      0   100%
+app/persistent_backend/__init__.py               0      0   100%
+app/persistent_backend/database.py              14      3    79%   28, 31, 34
+app/persistent_backend/query_statements.py       6      0   100%
+app/routers/__init__.py                          0      0   100%
+app/routers/retrieve_flows.py                   22      2    91%   35-36
+app/routers/store_flow_metrics.py               26      0   100%
+app/settings.py                                 10      0   100%
+--------------------------------------------------------------------------
+TOTAL                                           86      5    94%
+
+
+============================================ 5 passed in 0.73s ============================================
+ 
+
+
