@@ -1,34 +1,33 @@
 import databases
-import sqlalchemy
-
+from sqlalchemy import Column, String, Integer, create_engine, MetaData, Table
 from app.settings import config
 
 DATABASE_URL = config.database_url
 
 database = databases.Database(DATABASE_URL)
 
-metadata = sqlalchemy.MetaData()
+metadata = MetaData()
 
-raw_flow_events = sqlalchemy.Table(
+raw_flow_events = Table(
     "raw_flow_events",
     metadata,
-    sqlalchemy.Column("src_app", sqlalchemy.String),
-    sqlalchemy.Column("dest_app", sqlalchemy.String),
-    sqlalchemy.Column("vpc_id", sqlalchemy.String),
-    sqlalchemy.Column("hour", sqlalchemy.String),
-    sqlalchemy.Column("bytes_rx", sqlalchemy.Integer),
-    sqlalchemy.Column("bytes_tx", sqlalchemy.Integer)
+    Column("src_app", String),
+    Column("dest_app", String),
+    Column("vpc_id", String),
+    Column("hour", String),
+    Column("bytes_rx", Integer),
+    Column("bytes_tx", Integer)
 )
 
-engine = sqlalchemy.create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
-)
-
-async def create_engine():
+async def create_database_engine():
+    engine = create_engine(
+        DATABASE_URL, connect_args={"check_same_thread": False}
+    )
     metadata.create_all(engine)
 
 async def get_db():
-    return database
+    await create_database_engine()
+    yield database
 
 async def get_raw_flow_events():
     return raw_flow_events

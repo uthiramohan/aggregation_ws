@@ -18,6 +18,6 @@ submit_flow_data:
 get_flow_data:
 	chmod +x scripts/get_request.sh
 	./scripts/get_request.sh
-purge_db:
-	chmod +x scripts/purge_db.sh
-	./scripts/purge_db.sh
+purge_all:
+	chmod +x scripts/purge_all.sh
+	./scripts/purge_all.sh
